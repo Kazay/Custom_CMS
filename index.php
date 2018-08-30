@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 spl_autoload_register(function($className) {
     if(strpos($className, 'Helper'))
     {

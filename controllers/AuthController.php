@@ -4,8 +4,6 @@
  */
 class AuthController
 {
-    const SESSION_KEY = 'currentUser';
-
     public function login()
     {
         echo TemplateHelper::createTemplate('login', new stdClass());
@@ -15,9 +13,8 @@ class AuthController
     {
         $user = new UserModel();
         $username = $user->connectUser();
-        $_SESSION[self::SESSION_KEY] = $username;
+        $_SESSION[SESSION_KEY] = $username;
         header('Location: /view/home');die;
-
     }
     public function logoutAction()
     {

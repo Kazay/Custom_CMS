@@ -1,19 +1,14 @@
 <?php
-
+include_once('Model.php');
 /**
- * 
+ *
  */
-
-include 'Model.php';
-
 class PageModel extends Model
 {
-    protected $table = 'pages';
-
     function __construct()
     {
-        $this->tableName = $this->table;
+        $this->tableName = 'pages';
+        // Execute the direct parent constructor
         parent::__construct();
     }
-
 }

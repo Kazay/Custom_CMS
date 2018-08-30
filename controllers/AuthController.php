@@ -1,33 +1,28 @@
 <?php
-
 /**
- * 
+ *
  */
-
 class AuthController
 {
     const SESSION_KEY = 'currentUser';
 
     public function login()
     {
-        echo TemplateHelper::createTemplate(new stdClass(), 'login');
+        echo TemplateHelper::createTemplate('login', new stdClass());
     }
 
     public function loginAction()
     {
-        $userInfos = ['username' => $_POST['username'],
-                    'password' => $_POST['password'] ];
-
         $user = new UserModel();
-        if($user->exist($userInfos))
-        {
-            $_SESSION[self::SESSION_KEY] = $userInfos['username'];
-            header('Location: /views/home');die;
-        }
-        else {
-            var_dump('User Not Found');die;
-        }
-            
-        
+        $username = $user->connectUser();
+        $_SESSION[self::SESSION_KEY] = $username;
+        header('Location: /view/home');die;
+
+    }
+    public function logoutAction()
+    {
+        //@TODO update is_connected to 0
+        session_destroy();
+        header('Location: /view/home');die;
     }
 }

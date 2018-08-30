@@ -1,24 +1,16 @@
 <?php
-
-session_start();
-spl_autoload_register(function($className) {
-    if(strpos($className, 'Helper'))
-    {
-       $directory = 'helpers';
-    }
-    elseif(strpos($className, 'Controller'))
-    {
-        $directory = 'controllers';
-    }
-    elseif(strpos($className, 'Model'))
-    {
-        $directory = 'models';
-    }
-    else
-    {
-        throw new \Exception('Error including class. Please check your code', 1);
-    }
-    include './' . $directory . '/' . $className . '.php';
-});
-
-RouteHelper::getRoute();
+    session_start();
+    spl_autoload_register(function($className) {
+        $directory = '';
+        if(strpos($className, 'Helper')) {
+            $directory = 'helpers';
+        } else if(strpos($className, 'Controller')){
+            $directory = 'controllers';
+        } else if(strpos($className, 'Model')) {
+            $directory = 'models';
+        } else {
+            throw new \Exception("Error including class. Check your code");
+        }
+        include './' . $directory . '/' . $className . '.php';
+    });
+    RouteHelper::getRoute();

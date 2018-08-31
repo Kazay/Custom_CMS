@@ -30,10 +30,23 @@ class TemplateHelper
         foreach ($arrayPages as $page)
         {
             $pageListHtml .= '<form action="/page/updatePage" method="POST">';
-            $pageListHtml .= '<span>' . $page->title . '</span>';
+            $pageListHtml .= '<div class="title">' . $page->title . '</div>';
             foreach ($page as $key => $value)
             {
-                $pageListHtml .= '<input type="text" name="' . $key . '" value="' . $value . '">';
+                if($key !== 'id')
+                {
+                    $pageListHtml .= '<label for="' . $key . '">';
+                    $pageListHtml .= ucfirst($key);
+                    if($value == '0' || $value == '1')
+                    {
+                        ($value == '1')? $isChecked = 'checked' : $isChecked = '';
+                        $pageListHtml .= '<input type="checkbox" name="' . $key . '" value="' . $value . '"' . $isChecked . '>';
+                    }     
+                    else
+                        $pageListHtml .= '<input type="text" name="' . $key . '" value="' . $value . '">';
+                    $pageListHtml .= '</label>';
+                }
+                    
             }
             $pageListHtml .= '<input type="submit" name="" value="Update">';
             $pageListHtml .= '</form>';

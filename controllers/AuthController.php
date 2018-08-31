@@ -14,7 +14,7 @@ class AuthController
         $user = new UserModel();
         $username = $user->connectUser();
         $_SESSION[SESSION_KEY] = $username;
-        header('Location: /view/home');die;
+        header('Location: /admin/list');die;
     }
     public function logoutAction()
     {
